@@ -1,3 +1,13 @@
+
+# ignore trained files. 
+trainedFiles/
+
+# ignore trash folders
+trash/
+
+# ignore .vscode folder
+.vscode/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
