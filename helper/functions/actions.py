@@ -11,9 +11,12 @@ def optimalAction(state,player,QStatesActionsValues):
         # make sure that Q is initialized for this action. 
         if not is_initialized(state,action,QStatesActionsValues):
             QStatesActionsValues=initialize(state,action,QStatesActionsValues)
-        if getQValue(state,action,QStatesActionsValues) > optimalQValue:
-            optimalQValue=getQValue(state,action,QStatesActionsValues)
+        qValue=getQValue(state,action,QStatesActionsValues)
+        if qValue!=None and qValue > optimalQValue:
+            optimalQValue=qValue
             optimalAction=action
+        elif qValue==None:
+            raise Exception
     assert optimalQValue!=float("-inf"), "Something went wrong choosing a viable action."
     return optimalAction
 

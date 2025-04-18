@@ -27,6 +27,7 @@ def learn(iterations,learningRate,discountFactor,QStatesActionsValues):
 
             # Initialize Q if not done yet.
             for entry in emptyEntries(copy.deepcopy(board.state)):
+           
                 action={"entry":entry,"player":currPlayer}
                 if not is_initialized(copy.deepcopy(board.state),action,QStatesActionsValues):
                     QStatesActionsValues=initialize(copy.deepcopy(board.state),action,QStatesActionsValues)

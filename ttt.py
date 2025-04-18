@@ -1,6 +1,5 @@
 import random
 import pandas as pd
-import numpy as np
 from helper.learn import learn
 from helper.functions.saveAndRead import save_Q_as_json, read_json_as_Q
 from helper.play import play
@@ -22,7 +21,7 @@ else:
     
     
 if train:
-    QStatesActionsValues = learn(100, learningRate,discountFactor,QStatesActionsValues)
+    QStatesActionsValues = learn(10000, learningRate,discountFactor,QStatesActionsValues)
     save_Q_as_json(QStatesActionsValues,"trainedFiles/Q.json")
     # We save Q in an excel sheet for visualization and manual error checking. 
     # However, saving and writing Q as a data frame is cumbersome, we rather use JSON files (due to 'state' column of lists).
