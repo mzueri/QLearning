@@ -1,5 +1,5 @@
 
-def emptyEntries(state: list[str]) -> list[tuple]:
+def emptyEntries(state: list[list[str]]) -> list[tuple]:
     # find possible actions
     emptyEntries = []
     for row in range(3):

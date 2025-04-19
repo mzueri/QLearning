@@ -1,68 +1,39 @@
 from helper.board import Board
-from helper.functions.initializationQ import npFindIndex
-import copy
-from helper.functions.gameEnd import gameEnd
-from helper.functions.emptyEntries import emptyEntries
 from helper.functions.initializationQ import is_initialized, initialize
-from helper.functions.actions import optimalAction
-from helper.functions.winner import winner
+from helper.players import switchPlayers
+import copy
 
-def play(QStatesActionsValues,playerStarting):
+def play(board: Board, player1, player2, QStatesActionsValues):
 
-    assert playerStarting in ["human","computer"], "Invalid value for object 'playerStarting'. "
-
-    board=Board()
-    currPlayer=playerStarting
-    if playerStarting=="human":
-        humanMark="X"
-        computerMark="O"
+    if player1.mark=="X":
+        currPlayer=player1
     else:
-        humanMark="O"
-        computerMark="X"
+        currPlayer=player2
 
-    while not(gameEnd(copy.deepcopy(board.state))):
+    while not board.gameEnd():
         
-        if currPlayer=="computer":
-            # computer makes move.
-            for entry in emptyEntries(copy.deepcopy(board.state)):
-                action={"entry":entry,"player":computerMark}
-                if not is_initialized(copy.deepcopy(board.state),action,QStatesActionsValues):
-                    print("Need to initialize")
-                    print(entry)
-                    QStatesActionsValues=initialize(copy.deepcopy(board.state),action,QStatesActionsValues)
-        
-            action = optimalAction(copy.deepcopy(board.state),computerMark,QStatesActionsValues)
-            board.applyAction(action)
-            print("Computer makes the following move: ")
+        if currPlayer.is_human():
+            human_action=currPlayer.choose_action(board)
+            currPlayer.apply_action(board,human_action)
             board.printState()
-
         else:
-            # human shall make a move. 
-            humanMove = input("What is your next move? ")
-            try:
-                humanMove=eval(humanMove)
-            except: 
-                raise ValueError("Cannot evaluate input. Provide a tuple as input. ")
-            assert isinstance(humanMove, tuple), "The input is not a tuple."
-            assert len(humanMove)==2, "The tuple does consist of two elements."
-            assert humanMove[0] in range(3) and humanMove[1] in range(3), "Row and column indices out of bounce. "
-            action = {"entry":humanMove,"player":humanMark}
-            board.applyAction(action)
-            board.printState()
+            for entry in board.emptyEntries():
+                action={"entry":entry,"mark":currPlayer.mark}
+                if not is_initialized(board.state,action,QStatesActionsValues):
+                    QStatesActionsValues=initialize(copy.deepcopy(board.state),action,QStatesActionsValues)
+
+            optimal_action=currPlayer.choose_optimal_action(board,QStatesActionsValues)
+            currPlayer.apply_action(board,optimal_action)
+            print("Computer makes the following move: ")
+            board.printState()   
         
-        if currPlayer=="computer":
-            currPlayer="human"
-        elif currPlayer=="human":
-            currPlayer="computer"
+        # next player's turn, switch the current player
+        currPlayer=switchPlayers(currPlayer,player1,player2)
 
-    if winner(copy.deepcopy(board.state))==humanMark:
-        print("You win!")
-    elif winner(copy.deepcopy(board.state))==computerMark:
-        print("Computer wins!")
+    # display the result to the user.
+    if board.winner()==player1.mark:
+        print("Player 1 wins!")
+    elif board.winner()==player2.mark:
+        print("Player 2 wins!")
     else: 
-
-
         print("Nobody wins!")
-
-
-    

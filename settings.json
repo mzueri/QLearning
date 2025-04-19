@@ -1,0 +1,14 @@
+{
+    "main": {
+        "resetLearning": true,
+        "train": true,
+        "playGame": false,
+        "randomSeed": 321
+    },
+    "training": {
+        "learningEpisodes": 10000,
+        "learningRate": 0.1,
+        "discountFactor": 0.9,
+        "epsilon": 0.4
+    }
+}

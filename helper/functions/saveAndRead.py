@@ -19,6 +19,6 @@ def read_json_as_Q(dir_file):
     with open(dir_file, 'r') as f:
         Q = json.load(f)
 
-    Q=[[elem[0],{"entry":tuple(elem[1]["entry"]),"player":elem[1]["player"]},elem[2]] for elem in Q]
+    Q=[[elem[0],{"entry":tuple(elem[1]["entry"]),"mark":elem[1]["mark"]},elem[2]] for elem in Q]
 
     return Q

@@ -3,7 +3,7 @@ from helper.functions.winner import winner
 
 def reward(state,action) -> int:
     nextState = getNextState(state,action)
-    if winner(nextState)==action["player"]:
+    if winner(nextState)==action["mark"]:
         return 1
     #elif winner(nextState)!="nobody":
     #    return -1
