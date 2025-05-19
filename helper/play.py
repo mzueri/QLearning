@@ -1,14 +1,34 @@
 from helper.board import Board
+from helper.players import Human,Computer
 from helper.functions.initializationQ import is_initialized, initialize
 from helper.players import switchPlayers
 import copy
+from helper.gui import tkinter_gui
 
-def play(board: Board, player1, player2, QStatesActionsValues):
+def play(QStatesActionsValues):
+
+    board=Board()
+
+    playerStartingInput = input("Who should start? \nType 'm' if you want to start. Otherwise the computer will start. ")
+    if playerStartingInput=="m":
+        print("OK, you can start.")
+        player1=Human("X")
+        player2=Computer("O")
+    else:
+        print("OK, computer will start.")
+        player1=Human("O")
+        player2=Computer("X")
+
+    #gui=tkinter_gui(board)
+    #gui.board=board
 
     if player1.mark=="X":
         currPlayer=player1
     else:
         currPlayer=player2
+
+    #gui.current_mark=currPlayer.mark
+    #gui.root.destroy
 
     while not board.gameEnd():
         
