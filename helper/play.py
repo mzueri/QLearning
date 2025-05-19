@@ -7,29 +7,20 @@ from helper.gui import tkinter_gui
 
 def play(QStatesActionsValues):
 
-    board=Board()
-
     playerStartingInput = input("Who should start? \nType 'm' if you want to start. Otherwise the computer will start. ")
     if playerStartingInput=="m":
         print("OK, you can start.")
         player1=Human("X")
         player2=Computer("O")
+        currPlayer=player1
     else:
         print("OK, computer will start.")
         player1=Human("O")
         player2=Computer("X")
-
-    #gui=tkinter_gui(board)
-    #gui.board=board
-
-    if player1.mark=="X":
-        currPlayer=player1
-    else:
         currPlayer=player2
 
-    #gui.current_mark=currPlayer.mark
-    #gui.root.destroy
-
+    board=Board()
+    
     while not board.gameEnd():
         
         if currPlayer.is_human():
