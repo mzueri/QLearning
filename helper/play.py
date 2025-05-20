@@ -3,7 +3,7 @@ from helper.players import Human,Computer
 from helper.functions.initializationQ import is_initialized, initialize
 from helper.players import switchPlayers
 import copy
-from helper.gui import tkinter_gui
+from helper.gui import TicTacToeGUI
 
 def play(QStatesActionsValues):
 
@@ -12,15 +12,16 @@ def play(QStatesActionsValues):
         print("OK, you can start.")
         player1=Human("X")
         player2=Computer("O")
-        currPlayer=player1
     else:
         print("OK, computer will start.")
-        player1=Human("O")
-        player2=Computer("X")
-        currPlayer=player2
+        player1=Computer("X")
+        player2=Human("O")
 
-    board=Board()
+    game_gui=TicTacToeGUI(player1,player2,QStatesActionsValues)
+    game_gui.setup_ui()
+    game_gui.run()
     
+    """
     while not board.gameEnd():
         
         if currPlayer.is_human():
@@ -48,3 +49,4 @@ def play(QStatesActionsValues):
         print("Player 2 wins!")
     else: 
         print("Nobody wins!")
+        """
