@@ -1,6 +1,6 @@
 # Tic-Tac-Toe (implemented using QLearning)
 
-My implementationi of Tic-Tac-Toe using QLearning.
+My implementationi of Tic-Tac-Toe using QLearning including tkinter GUI for nice UX.
 
 
 How to use this repo:
