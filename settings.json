@@ -1,8 +1,8 @@
 {
     "main": {
-        "resetLearning": true,
-        "train": true,
-        "playGame": false,
+        "resetLearning": false,
+        "train": false,
+        "playGame": true,
         "randomSeed": 321
     },
     "training": {

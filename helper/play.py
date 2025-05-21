@@ -1,15 +1,27 @@
 from helper.board import Board
+from helper.players import Human,Computer
 from helper.functions.initializationQ import is_initialized, initialize
 from helper.players import switchPlayers
 import copy
+from helper.gui import TicTacToeGUI
 
-def play(board: Board, player1, player2, QStatesActionsValues):
+def play(QStatesActionsValues):
 
-    if player1.mark=="X":
-        currPlayer=player1
+    playerStartingInput = input("Who should start? \nType 'm' if you want to start. Otherwise the computer will start. ")
+    if playerStartingInput=="m":
+        print("OK, you can start.")
+        player1=Human("X")
+        player2=Computer("O")
     else:
-        currPlayer=player2
+        print("OK, computer will start.")
+        player1=Computer("X")
+        player2=Human("O")
 
+    game_gui=TicTacToeGUI(player1,player2,QStatesActionsValues)
+    game_gui.setup_ui()
+    game_gui.run()
+    
+    """
     while not board.gameEnd():
         
         if currPlayer.is_human():
@@ -37,3 +49,4 @@ def play(board: Board, player1, player2, QStatesActionsValues):
         print("Player 2 wins!")
     else: 
         print("Nobody wins!")
+        """

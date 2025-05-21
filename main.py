@@ -3,8 +3,6 @@ import pandas as pd
 from helper.learn import learn
 from helper.functions.saveAndRead import save_Q_as_json, read_json_as_Q
 from helper.play import play
-from helper.players import Human, Computer
-from helper.board import Board
 import json
 
 
@@ -30,10 +28,4 @@ if settings["main"]["train"]:
 
 if settings["main"]["playGame"]:
     QStatesActionsValues=read_json_as_Q("trainedFiles/Q.json")
-    playerStartingInput = input("Who should start? \nType 'm' if you want to start. Otherwise the computer will start. ")
-    if playerStartingInput=="m":
-        print("OK, you can start.")
-        play(Board(),Human("X"),Computer("O"),QStatesActionsValues)
-    else:
-        print("OK, computer will start.")
-        play(Board(),Human("O"),Computer("X"),QStatesActionsValues)
+    play(QStatesActionsValues)
